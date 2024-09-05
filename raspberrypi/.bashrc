@@ -113,6 +113,7 @@ if ! shopt -oq posix; then
 fi
 
 # Roshan's additions here!
+cd ~/Documents/cs334
 cp /home/student334/.bashrc ~/Documents/cs334/raspberrypi
 hostname -I > ~/Documents/cs334/raspberrypi/ip.md
 ~/Documents/cs334/backup.sh
