@@ -6,3 +6,8 @@ Password: cpsc334!
     
 We created a systemd unit file called:
     thanks_koray_for_helping_us_with_this.service
+
+    touch /etc/systemd/system/thanks_koray_for_helping_us_with_this.service
+    chmod 666 /etc/systemd/system/thanks_koray_for_helping_us_with_this.service
+    chown student334:student334 /etc/systemd/system/thanks_koray_for_helping_us_with_this.service
+    systemctl enable thanks_koray_for_helping_us_with_this.service
