@@ -2,6 +2,7 @@
 cd ~/Documents/cs334
 cp /home/student334/.bashrc ~/Documents/cs334/raspberrypi
 cp /etc/systemd/system/thanks_koray_for_helping_us_with_this.service ~/Documents/cs334/raspberrypi
+
 cp /boot/config.txt ~/Documents/cs334/raspberrypi/configs/backup_old_config.txt
 cp /boot/firmware/config.txt ~/Documents/cs334/raspberrypi/configs/backup_config.txt
 hostname -I > ~/Documents/cs334/raspberrypi/ip.md
