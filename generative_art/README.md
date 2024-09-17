@@ -1,3 +1,5 @@
+Video link: https://youtu.be/RG5ztel61X0
+
 This piece of generative art is meant to abstractly depict a battle occuring in space. The central, large structure made of glass cube/prism layers is meant to convey a sense of scale, and the small spiked green objects are intended to evoke an image of alien spacecraft attacking the large ship in the center. 
 
 The main spaceship is made by interpolating colors and drawing randomly generated length/width rectangles within a grid based on randomly generated frame sizes and layer thickness parameters. Additionally, each section has a 1/2 probabilty of being "tapered" which gives some segments the trapezoidal look (my intention was that these would look like engines and such). All randomly generated parameters are scaled by the display length and width so that in effect, we are just randomly sampling the ratios rather than their absolute values.
