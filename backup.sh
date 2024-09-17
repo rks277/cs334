@@ -5,6 +5,7 @@ cp /etc/systemd/system/thanks_koray_for_helping_us_with_this.service ~/Documents
 
 cp /boot/config.txt ~/Documents/cs334/raspberrypi/configs/backup_old_config.txt
 cp /boot/firmware/config.txt ~/Documents/cs334/raspberrypi/configs/backup_config.txt
+cp ~/.config/wayfire.ini ~/Documents/cs334/generative_art
 hostname -I > ~/Documents/cs334/raspberrypi/ip.md
 pwd
 

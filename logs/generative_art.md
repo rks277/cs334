@@ -1,0 +1,1 @@
+Systemd was not working, so edited  ~/.config/wayfire.ini instead
