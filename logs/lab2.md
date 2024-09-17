@@ -7,9 +7,31 @@ Password: cpsc334!
 We created a systemd unit file called:
     thanks_koray_for_helping_us_with_this.service
 
+    After=network-online.target
+
     touch /etc/systemd/system/thanks_koray_for_helping_us_with_this.service
     chmod 666 /etc/systemd/system/thanks_koray_for_helping_us_with_this.service
     chown student334:student334 /etc/systemd/system/thanks_koray_for_helping_us_with_this.service
     systemctl enable thanks_koray_for_helping_us_with_this.service
 
+    systemctl daemon-reload
+    sudo systemctl start thanks_koray_for_helping_us_with_this.service
+    systemctl status thanks_koray_for_helping_us_with_this.service
+
 We also added the config.txt file as well to the bash script
+
+
+[Unit]
+Description=launch generative art
+Requires=graphical.target
+After=network.target
+
+[Service]
+User=student334
+Group=student334
+Environment=DISPLAY=:0
+WorkingDirectory=/home/student334/Documents/cs334/generative_art/src
+ExecStart=/home/student334/Documents/cs334/generative_art/display_on_boot.sh
+
+[Install]
+WantedBy=default.target
