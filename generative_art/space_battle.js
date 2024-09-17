@@ -19,12 +19,11 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   
   if (width * height < 1000) {numAliens = 0}
-  else {numAliens = int(width / 150)}
+  else {numAliens = int(width / 400)}
   
-  alien(width * 0.2, height * 0.2);
   spaceshipLayer = createGraphics(width * 0.4, height * 0.4);
   resetSpaceshipLayer();
-  spaceshipLayerDepth = int(random(width * 0.04, height * 0.07)); 
+  spaceshipLayerDepth = int(random(width * 0.04, width * 0.07) / 5); 
   c1 = color(250, 120, 50, 50);
   c2 = color(255);
   c3 = color(0);
@@ -34,8 +33,8 @@ function setup() {
   background(0);
   posX2 = 0;
   posY2 = height;
-  speedX2 = random(-1, 1); 
-  speedY2 = random(-3, -1);
+  speedX2 = width * random(-1, 1) / 900; 
+  speedY2 = height * random(-3, -1) / 900;
   for (let i = 0; i < width; i += 40) {
     for (let j = 0; j < height; j += 40) {
       strokeWeight(random(0.5, 2));
@@ -52,7 +51,7 @@ function draw() {
   if (frameCount % spaceshipLayerDepth == 0) resetSpaceshipLayer();
   if (tapered > 50) scaleFactor *= 0.995;
   
-  posX2 += speedX2 + 4;
+  posX2 += speedX2 + 4 * width / 900;
   posY2 += speedY2;
   spaceship();
   color_ = lerpColor(c1, c3, 0.8);
@@ -102,7 +101,7 @@ function resetSpaceshipLayer() {
 }
 
 function alien(xpos, ypos) {
-  for (let i = 0; i < random(10, 20); i++) {
+  for (let i = 0; i < 5; i++) {
     points.push({ 
       x: xpos + random(-2, 2), 
       y: ypos + random(-2, 2), 
