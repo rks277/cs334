@@ -5,6 +5,7 @@ After=network-online.target
 [Service]
 Type=simple
 ExecStart=/home/student334/Documents/cs334/backup.sh
+ExecStart=/home/student334/Documents/cs334/generative_art/backup.sh
 User=student334
 
 [Install]
