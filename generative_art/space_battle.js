@@ -1,3 +1,6 @@
+// Inspiration for alien spaceships: https://editor.p5js.org/mtchl/sketches/S1Lfx04il
+// Inspiration for main spaceship: https://editor.p5js.org/martaverde/sketches/GGGaqpyAr
+
 let spaceshipLayer;
 let spaceshipHeight, spaceshipWidth, spaceshipLayerDepth;
 let tapered;
