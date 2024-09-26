@@ -10,4 +10,6 @@
 #### Getting Joystick/Button/Switch Output
 
 5. Flash code from https://sankios.imediabank.com/2-axis-joystick to ESP32
-6. 
+6. Connect pins from joystick to ESP32 using female-to-female
+7. Change the variables in the program to match the GPIO number of the pins we used (there's a pinout map on the notion)
+8. 
