@@ -18,6 +18,8 @@ const int stepsPerRevolution = 2048;  // change this to fit the number of steps 
 #define IN4 17
 Stepper myStepper(stepsPerRevolution, IN1, IN3, IN2, IN4);
 
+int stepperPosition = 0;  // Track the current position of the stepper in degrees
+
 // Init functions
 void initStepper() {
     // Initialize stepper motor speed
@@ -41,14 +43,15 @@ void setup() {
 
 // Basic control functions
 int rotate(int degrees) {
-    const int steps = stepsPerRevolution * degrees / 360;
+    int steps = stepsPerRevolution * degrees / 360;
     myStepper.step(steps);
+    stepperPosition = (stepperPosition + degrees) % 360;  // Update the stepper position and keep it within 0-359
     return 1;
 }
 
 int moveArm(int arm_idx, int degrees) {
     int new_angle = servoPositions[arm_idx] + degrees;
-    // Check if we can do the roation
+    // Check if we can do the rotation
     if (new_angle > 180 || new_angle < 0) {
         return -1;
     }
@@ -75,14 +78,26 @@ int moveAllArmsDown() {
     return 1;
 }
 
+// Reset function
+void reset() {
+    Serial.println("Resetting stepper and servos to 0 position");
+    rotate(-stepperPosition);
+
+    for (int i = 0; i < NUM_SERVOS; i++) {
+        moveArm(i, -servoPositions[i]);
+    }
+
+    Serial.println("Reset complete");
+    delay(500);
+}
+
 // Animations
-void waveMotion(int amplitude, int speed) {
+void wave(int amplitude, int speed) {
     for (int angle = 0; angle <= amplitude; angle += speed) {
         for (int i = 0; i < NUM_SERVOS; i++) {
             int waveAngle = angle + (i * speed);
             waveAngle = waveAngle % 180;
-            servos[i].write(waveAngle);
-            servoPositions[i] = waveAngle;
+            moveArm(i, waveAngle - servoPositions[i]);
         }
         delay(100);
     }
@@ -99,8 +114,8 @@ void sequential(int stepAngle, int liftAngle) {
     }
 }
 
-void bounce(int bounceAngle, int stepAngle, int bounces) {
-    for (int b = 0; b < bounces; b++) {
+void bounce(int bounceAngle, int stepAngle) {
+    for (int b = 0; b < 3; b++) {
         for (int i = 0; i < NUM_SERVOS; i++) {
             if (moveArm(i, bounceAngle) < 0) {
                 continue;
@@ -112,6 +127,8 @@ void bounce(int bounceAngle, int stepAngle, int bounces) {
             moveArm(i, -bounceAngle);
         }
         delay(200);
+
+        rotate(stepAngle);
     }
 }
 
@@ -124,12 +141,12 @@ void spiral(int maxStepAngle, int sweepAngle) {
                 continue;
             }
         }
-        delay(200);
+        delay(150);
 
         for (int i = 0; i < NUM_SERVOS; i++) {
             moveArm(i, -sweepAngle);
         }
-        delay(200);
+        delay(150);
     }
 }
 
@@ -153,25 +170,26 @@ void loop() {
     switch (animationIndex) {
         case 0:
             Serial.println("Playing wave motion");
-            waveMotion(180, 10);
+            wave(180, 10);
             break;
         case 1:
             Serial.println("Playing sequential motion");
-            sequentialLift(10, 30);
+            sequential(10, 30);
             break;
         case 2:
             Serial.println("Playing bounce animation");
-            bounceAnimation(30, 5);
+            bounce(30, 5);
             break;
         case 3:
-            Serial.println("Playing spiral sweep");
-            spiralSweep(60, 45);
+            Serial.println("Playing spiral motion");
+            spiral(60, 45);
             break;
         case 4:
-            Serial.println("Playing cascade effect");
-            cascadeEffect(90, 15);
+            Serial.println("Playing cascade animation");
+            cascade(90, 15);
             break;
     }
     
+    reset();
     delay(1000);
 }
