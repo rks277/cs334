@@ -166,6 +166,7 @@ void cascade(int cascadeAngle, int stepAngle) {
 }
 
 void loop() {
+    reset();
     int animationIndex = random(0, NUM_ANIMATIONS);
     switch (animationIndex) {
         case 0:
@@ -189,7 +190,5 @@ void loop() {
             cascade(90, 15);
             break;
     }
-    
-    reset();
     delay(1000);
 }
